@@ -34,7 +34,7 @@ export class ViewerService {
     }
   }
 
-  private initView(canvas: HTMLCanvasElement, shoe: Object3D): void {
+  private initView(canvas: HTMLCanvasElement, shoe1: Object3D): void {
 
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
@@ -42,12 +42,19 @@ export class ViewerService {
     const camera = this.buildCamera(width, height);
     const scene = this.buildScene();
 
-    this.applyShinyRedMaterial(shoe);
-    scene.add(shoe);
+    this.applyShinyRedMaterial(shoe1);
+
+    const shoe2 = shoe1.clone();
+
+    shoe1.position.z = 0.02;
+    shoe2.position.z = -0.02;
+
+    scene.add(shoe1);
+    scene.add(shoe2);
 
     const renderer = this.buildRenderer(canvas, width, height);
 
-    this.engine = new Engine(renderer, scene, camera, shoe);
+    this.engine = new Engine(renderer, scene, camera, shoe1, shoe2);
     this.engine.render();
   }
 
