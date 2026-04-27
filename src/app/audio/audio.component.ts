@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'dss-audio',
   imports: [NzButtonComponent, FormsModule, NzSliderComponent],
   template: `
-    <nz-slider [nzMin]="10" [nzMax]="1000" [nzDefaultValue]="100" (nzOnAfterChange)="zoom($event)" />
+    <nz-slider [nzMin]="10" [nzMax]="1000" [(ngModel)]="service.minPxPerSec"/>
 
     <div class="buttons">
       <button nz-button (click)="playPause()">
@@ -28,10 +28,9 @@ import { FormsModule } from '@angular/forms';
     .buttons {
       margin-bottom: 1rem;
     }
-
   `,
 })
-export class AudioComponent implements AfterViewInit{
+export class AudioComponent implements AfterViewInit {
   readonly service = inject(AudioService);
 
   ngAfterViewInit(): void {
@@ -40,11 +39,5 @@ export class AudioComponent implements AfterViewInit{
 
   playPause(): void {
     this.service.playPause();
-  }
-
-  zoom(event: number[] | number): void {
-    if (!Array.isArray(event)) {
-      this.service.zoom(event);
-    }
   }
 }

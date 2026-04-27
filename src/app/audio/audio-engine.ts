@@ -2,13 +2,12 @@ import WaveSurfer from 'wavesurfer.js';
 import RegionsPlugin from 'wavesurfer.js/plugins/regions';
 import { ModelService } from '../model/model.service';
 
-
 export class AudioEngine {
 
   private readonly regions: RegionsPlugin;
   private readonly waveSurfer: WaveSurfer;
 
-  constructor(private modelService: ModelService) {
+  constructor(private modelService: ModelService, private minPxPerSec: number){
     this.regions = RegionsPlugin.create()
     this.waveSurfer = this.buildWaveSurfer();
     this.initLogging();
@@ -36,7 +35,7 @@ export class AudioEngine {
       waveColor: '#0000ff',
       progressColor: '#000055',
       dragToSeek: true,
-      minPxPerSec: 100,
+      minPxPerSec: this.minPxPerSec,
       plugins: [
         this.regions
       ]
