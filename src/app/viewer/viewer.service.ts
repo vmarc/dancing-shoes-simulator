@@ -28,9 +28,9 @@ export class ViewerService {
     );
   }
 
-  toggleShoe(): void {
+  render(leftDown: boolean, rightDown: boolean): void {
     if (this.engine) {
-      this.engine.toggleShoe();
+      this.engine.render(leftDown, rightDown);
     }
   }
 
@@ -55,7 +55,7 @@ export class ViewerService {
     const renderer = this.buildRenderer(canvas, width, height);
 
     this.engine = new Engine(renderer, scene, camera, shoe1, shoe2);
-    this.engine.render();
+    this.engine.render(false, false);
   }
 
   private loadShoe(onLoad: (data: GLTF) => void): void {

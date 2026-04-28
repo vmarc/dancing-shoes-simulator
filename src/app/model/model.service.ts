@@ -8,7 +8,7 @@ import { inject } from '@angular/core';
 export class ModelService {
   private httpClient = inject(HttpClient);
 
-  private model = new Model();
+  readonly model = new Model();
 
   constructor() {
     this.loadEvents();
@@ -17,7 +17,6 @@ export class ModelService {
   get events(): TimeLineEvent[] {
     return this.model.timeLine.events;
   }
-
 
   private loadEvents() {
     this.httpClient.get('events.txt', {responseType: 'text'}).subscribe(data => {
@@ -36,5 +35,4 @@ export class ModelService {
       });
     });
   }
-
 }

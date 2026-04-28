@@ -22,10 +22,6 @@ export class AudioService {
     this.engine = new AudioEngine(this.modelService, this.minPxPerSec());
   }
 
-  now(): number {
-    return this.engine?.now() ?? 0;
-  }
-
   playPause(): void {
     this.engine?.playPause();
   }

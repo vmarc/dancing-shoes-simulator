@@ -10,15 +10,15 @@ export class AudioEngine {
   constructor(private modelService: ModelService, private minPxPerSec: number){
     this.regions = RegionsPlugin.create()
     this.waveSurfer = this.buildWaveSurfer();
-    this.initLogging();
+    // this.initLogging();
     this.waveSurfer.load('dance.mp3');
     this.waveSurfer.on('decode', () => {
       this.buildMarkers();
     });
-  }
 
-  now(): number {
-    return this.waveSurfer.getCurrentTime();
+    this.waveSurfer.on('timeupdate', (currentTime) => {
+      this.modelService.model.tick(currentTime);
+    });
   }
 
   playPause(): void {
