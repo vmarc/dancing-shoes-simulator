@@ -1,6 +1,7 @@
 import WaveSurfer from 'wavesurfer.js';
 import RegionsPlugin from 'wavesurfer.js/plugins/regions';
 import { ModelService } from '../model/model.service';
+import { TimeLineEvent } from '../model/time-line-event';
 
 export class AudioEngine {
 
@@ -34,6 +35,8 @@ export class AudioEngine {
       container: '#waveform',
       waveColor: '#0000ff',
       progressColor: '#000055',
+      cursorColor: '#ff0000',
+      cursorWidth: 3,
       dragToSeek: true,
       minPxPerSec: this.minPxPerSec,
       plugins: [
@@ -130,11 +133,17 @@ export class AudioEngine {
   }
 
   private buildMarkers(): void {
-    this.modelService.events.forEach((event) => {
+    this.buildEventMarkers(this.modelService.model.timeLine.eventsLeft, 'rgba(255, 0, 0, 0.1)');
+    this.buildEventMarkers(this.modelService.model.timeLine.eventsRight, 'rgba(0, 255, 0, 0.1)');
+  }
+
+  private buildEventMarkers(events: TimeLineEvent[], color: string): void {
+    events.forEach((event) => {
       this.regions.addRegion({
-        start: event.time,
+        start: event.time1,
+        end: event.time2,
         content: event.label,
-        color: 'rgba(255, 0, 0, 0.5)',
+        color: color,
       })
     });
   }

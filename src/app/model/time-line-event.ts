@@ -1,4 +1,5 @@
 export interface TimeLineEvent {
-  time: number;
+  time1: number;
+  time2: number;
   label: string;
 }

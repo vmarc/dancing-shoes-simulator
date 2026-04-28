@@ -14,23 +14,23 @@ export class ModelService {
     this.loadEvents();
   }
 
-  get events(): TimeLineEvent[] {
-    return this.model.timeLine.events;
+  private loadEvents() {
+    this.loadEventsIn(this.model.timeLine.eventsLeft, 'left.txt');
+    this.loadEventsIn(this.model.timeLine.eventsRight, 'right.txt');
   }
 
-  private loadEvents() {
-    this.httpClient.get('events.txt', {responseType: 'text'}).subscribe(data => {
+  private loadEventsIn(events: TimeLineEvent[], url: string): void {
+    this.httpClient.get(url, {responseType: 'text'}).subscribe(data => {
       const lines = data.split('\n');
       lines.forEach(line => {
-        if (line.trim()) {
-          const parts = line.split('\t');
-          if (parts.length >= 3) {
-            const event: TimeLineEvent = {
-              time: parseFloat(parts[0]),
-              label: parts[2]
-            };
-            this.model.timeLine.events.push(event);
-          }
+        const parts = line.split('\t');
+        if (parts.length >= 3) {
+          const event: TimeLineEvent = {
+            time1: parseFloat(parts[0]),
+            time2: parseFloat(parts[1]),
+            label: parts[2]
+          };
+          events.push(event);
         }
       });
     });

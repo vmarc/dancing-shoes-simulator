@@ -42,9 +42,10 @@ export class ViewerService {
     const camera = this.buildCamera(width, height);
     const scene = this.buildScene();
 
-    this.applyShinyRedMaterial(shoe1);
-
     const shoe2 = shoe1.clone();
+
+    this.applyMaterial(shoe1, 0xFF0000);
+    this.applyMaterial(shoe2, 0x00FF00);
 
     shoe1.position.z = 0.02;
     shoe2.position.z = -0.02;
@@ -99,9 +100,9 @@ export class ViewerService {
     return renderer;
   }
 
-  private applyShinyRedMaterial(object: Object3D): void {
+  private applyMaterial(object: Object3D, color: number): void {
     const material = new MeshPhongMaterial({
-      color: 0xFF0000,
+      color: color,
       shininess: 150
     });
 
