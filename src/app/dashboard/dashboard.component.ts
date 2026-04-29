@@ -9,16 +9,20 @@ import { Model } from '../model/model';
   selector: 'dss-dashboard',
   template: `
     <div class="dashboard-container">
+      <dss-position [model]="model()"/>
       <dss-switches [model]="model()"/>
       <dss-motors [model]="model()"/>
-      <dss-position [model]="model()"/>
     </div>
   `,
   styles: `
     .dashboard-container {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       gap: 1em;
+    }
+
+    dss-position {
+      width: 20em;
     }
 
     dss-switches {
@@ -26,11 +30,7 @@ import { Model } from '../model/model';
     }
 
     dss-motors {
-      width: 40em;
-    }
-
-    dss-position {
-      width: 20em;
+      width: 41em;
     }
   `,
   imports: [
