@@ -2,16 +2,14 @@ import { Component } from '@angular/core';
 import { inject } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { AudioService } from './audio.service';
-import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'dss-audio',
-  imports: [NzButtonComponent, FormsModule],
+  imports: [FormsModule],
   template: `
-    <!-- <nz-slider [nzMin]="10" [nzMax]="1000" [(ngModel)]="service.minPxPerSec"/> -->
-
     <div id="waveform" ></div>
+    <!-- <nz-slider [nzMin]="10" [nzMax]="1000" [(ngModel)]="service.minPxPerSec"/> -->
   `,
   styles: `
     #waveform {
