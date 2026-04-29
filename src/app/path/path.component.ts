@@ -14,9 +14,9 @@ import { PathBuilder } from './path-builder';
   `,
   styles: `
     .canvas {
-      width: 600px;
-      height: 400px;
-      border: 1px solid green;
+      width: 602px;
+      height: 402px;
+      border: 1px solid black;
     }
   `,
   imports: [
